@@ -1,0 +1,14 @@
+@media (max-width: 600px) {
+  .column.right.side  {
+    display: none;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .header nav a {
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Palatino Linotype", sans-serif;
+  color: black;
+}
+
+.header {
+  background-color: cornflowerblue;
+  padding: 5px;
+  text-align: center;
+  font-size: 20px;
+  color: mistyrose;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.header p {
+  text-align: left;
+  font-family: "Lucida Handwriting", sans-serif;
+}
+
+.header nav {
+  display: flex;
+  align-items: flex-end;
+}
+
+.header nav a {
+  text-decoration: none;
+  color: antiquewhite;
+  margin-left: 10px;
+}
+
+.row {
+  display: flex;
+}
+
+.column {
+  padding: 5px;
+}
+
+.column.right.side {
+  background-color: peachpuff;
+  color: black;
+  flex: 1;
+}
+
+.column.middle {
+  flex: 4;
+  background-color: mistyrose;
+  color: black;
+}
+
+.footer {
+  background-color: cornflowerblue;
+  padding: 5px;
+  color: indianred;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer-column {
+  line-height: 1;
+  width: 25%;
+  text-align: center;
+  padding: 10px;
+}
+
+.footer a {
+  text-transform: uppercase;
+  margin: 0.5em;
+  text-decoration: none;
+  color: antiquewhite;
+}
