@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    
+<div class="edit-ingredient-form">
+
+<h2>Edit Ingredient</h2>
+    
+<form action="{% url 'edit_ingredient' pk=object.pk recipe_pk=object.recipe.pk %}" method="post">
+    
+    {{ form.as_p }}
+    
+    <button type="submit">Save</button>
+    
+    {% csrf_token %}
+
+    
+</form>
+    
+</div>
+    
+{% endblock %}

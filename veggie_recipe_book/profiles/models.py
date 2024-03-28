@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 from veggie_recipe_book.profiles.validators import UsernameValidator
+from veggie_recipe_book.recipes.validators import validate_image_size
 
 UserModel = get_user_model()
 
@@ -44,16 +45,16 @@ class Profile(models.Model):
                                                                 ),
                                              ],
                                  )
-    profile_pic = models.URLField(blank=True,
-                                  null=True,
-                                  )
+    profile_pic = models.ImageField(upload_to='profile_pictures/',
+                                    blank=True,
+                                    null=True,
+                                    validators=[validate_image_size,
+                                                ],
+                                    help_text="Upload a picture",
+                                    )
     email = models.EmailField(null=False,
                               blank=False,
                               )
-
-    age = models.PositiveIntegerField(null=True,
-                                      blank=True,
-                                      )
     user = models.OneToOneField(UserModel,
                                 primary_key=True,
                                 on_delete=models.CASCADE,

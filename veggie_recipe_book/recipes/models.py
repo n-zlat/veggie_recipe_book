@@ -40,6 +40,10 @@ class Ingredient(models.Model):
                                         ],
                             help_text="Ingredient Name",
                             )
+    amount = models.FloatField(null=False,
+                               blank=False,
+                               default=1,
+                               )
     measurement_unit = models.CharField(max_length=MAX_MEASUREMENT_UNITS_LENGTH,
                                         choices=MeasurementUnit,
                                         blank=False,
@@ -53,7 +57,7 @@ class Ingredient(models.Model):
                                           )
 
     def __str__(self):
-        return f'{self.name} - {self.measurement_unit}, {self.additional_context}'
+        return f'{self.name} - {self.amount}{self.measurement_unit}, {self.additional_context}'
 
 
 class Recipe(models.Model):

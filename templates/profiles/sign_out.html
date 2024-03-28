@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+<form action="{% url 'sign_out' %}" method="post">
+
+    <button type="submit">Logout</button>
+    {% csrf_token %}
+
+</form>
+
+{% endblock %}

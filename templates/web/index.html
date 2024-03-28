@@ -1,7 +1,21 @@
-{% extends "base.html" %}
- 
+{% extends 'base.html' %}
+{% load static %}
+
 {% block content %}
     
+<div class="recipes-all-public">
     
+    {% for recipe in recipes %}
+        
+        <div class="recipe-card">
+            <h3>{{ recipe.title }}</h3>
+            <img src="{{ recipe.picture.url }}" alt="{{ recipe.title }}">
+            <p>Type: {{ recipe.recipe_type }}</p>
+            <p>Author: {{ recipe.author }}</p>
+            <a href="{% url 'details_recipe' pk=recipe.pk %}">More</a>
+        </div>
+    {% endfor %}
 
+</div>    
+    
 {% endblock %}

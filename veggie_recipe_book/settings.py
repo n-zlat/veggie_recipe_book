@@ -113,7 +113,16 @@ STATICFILES_DIRS = (
     BASE_DIR / "staticfiles",
 )
 
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+MEDIA_URL = "/media/"
+
+LOGIN_URL = 'sign_in'
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOGOUT_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/'
