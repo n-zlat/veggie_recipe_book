@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+
+    <div class='404-img'>
+        <img src="{% static 'images/404_img.jpg' %}" alt="Empty plate, 404 not found page">
+    </div>
+
+    <div class='404-text'>
+        <h1>
+            Page not found
+        </h1>
+
+        <h3>Sorry, the page you're looking for doesn't  exist.</h3>
+    </div>
+    
+{% endblock %}

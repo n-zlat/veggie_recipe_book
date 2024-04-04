@@ -4,36 +4,53 @@
 
 {% block content %}
    <div class="profile-details">
+
+    <h2>{{ profile.username }}</h2>
+   {% if user.pk == profile.pk %}
+       <div class="profile-buttons">
+            <a href="{% url 'edit_profile' pk=user.pk %}" class="edit-button">Edit</a>
+            <a href="{% url 'delete_profile' pk=user.pk %}" class="delete-button">Delete</a>
+       </div>
+   {% endif %}
    
-    <h2>{{ user.username }} Details:</h2>
-    <img class="profile-picture" height="150px" src="{% if user.profile.pic %}{{ user.profile.pic.url }}
-        {% else %}{% static 'images/anon_user_profile_pic.jpg' %}{% endif %}" alt="profile-picture" />
    
-    <p>Username: {{ user.username }}</p>
-    {% if first_name %}
-            <p>First Name: {{ user.first_name }}</p>
-    {% endif %}
-    {% if last_name %}
-            <p>Last Name: {{ user.last_name }}</p>
-    {% endif %}
-    {% if email %}
-            <p>Email: {{ user.email }}</p>
-    {% endif %}
+    <img class="profile-picture" height="150px" src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}
+    {% else %}{% static 'images/anon_user_profile_pic.jpg' %}{% endif %}" alt="profile picture" >
+   
+    <p>Username: {{ profile.username }}</p>
+   
+   {% if user.pk == profile.pk %}
+        {% if first_name %}
+                <p>First Name: {{ profile.first_name|lower|capfirst }}</p>
+        {% endif %}
+        {% if last_name %}
+                <p>Last Name: {{ profile.last_name|lower|capfirst }}</p>
+        {% endif %}
+        {% if email %}
+                <p>Email: {{ profile.email }}</p>
+        {% endif %}
+   {% endif %}
     
     <h3>Added Recipes:</h3>
-    {% if recipes %}
+       {% if no_recipes %}
+        <p>No recipes to show</p>
+        {% else %}
         <ul>
             {% for recipe in recipes %}
-                <li>{{ recipe.title }}</li>
+                <li>
+                    <a href="{% url 'details_recipe' pk=recipe.pk %}">{{ recipe.title|lower|capfirst }}</a>
+                </li>
             {% endfor %}
         </ul>
-    {% else %}
-        <p>No recipes to show</p>
-    {% endif %}
+        {% endif %}
    
-   <div class="buttons">
-        <a href="{% url 'edit_profile' pk=user.pk %}" class="edit-button">Edit</a>
-        <a href="{% url 'delete_profile' pk=user.pk %}" class="delete-button">Delete</a>
+    {% if user.pk == profile.pk %}
+       <div class="add-recipe-button">
+        <a 
+                href="{% url 'add_recipe' %}"><button>Add Recipe</button>
+        </a>
+       </div>
+   {% endif %}
+   
    </div>
-</div>
 {% endblock %}

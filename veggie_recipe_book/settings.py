@@ -1,5 +1,7 @@
 from pathlib import Path
 
+from django.urls import reverse_lazy
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -13,10 +15,9 @@ SECRET_KEY = 'django-insecure-@lxy4e*6ek7yow$jeg!-gja=!x&-ut&*n255qzei(*x0cqi(a&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
-
-# Application definition
+ALLOWED_HOSTS = [
+    'localhost',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -117,12 +118,13 @@ MEDIA_ROOT = BASE_DIR / 'mediafiles'
 
 MEDIA_URL = "/media/"
 
-LOGIN_URL = 'sign_in'
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGOUT_REDIRECT_URL = '/'
-LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = reverse_lazy('home')
+LOGIN_REDIRECT_URL = reverse_lazy('home')
+LOGIN_URL = reverse_lazy("sign_in")
+
+

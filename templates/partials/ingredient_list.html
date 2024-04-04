@@ -1,0 +1,7 @@
+{% load custom_filters %}
+
+<ul>
+    {% for ingredient in recipe.ingredients_text|split_newline %}
+        <li>{{ ingredient }}</li>
+    {% endfor %}
+</ul>

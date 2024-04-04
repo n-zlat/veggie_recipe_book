@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="delete-recipe">
+
+    <h2>Are you sure you want to delete {{ recipe.title }}?</h2>
+    
+    <form action="{% url 'delete_recipe' pk=recipe.pk %}" method="post">
+        <button class="delete-button" type="submit">Delete</button>
+        
+        {% csrf_token %}
+    </form>
+    
+    <a class="back-button" href="{% url 'details_recipe' pk=object.pk %}">Cancel</a>
+</div>
+{% endblock %}

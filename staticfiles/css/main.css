@@ -25,7 +25,6 @@ body {
 
 .header nav {
   display: flex;
-  align-items: flex-end;
 }
 
 .header nav a {
@@ -39,10 +38,10 @@ body {
 }
 
 .column {
-  padding: 5px;
+  padding: 2px;
 }
 
-.column.right.side {
+.column-side {
   background-color: peachpuff;
   color: black;
   flex: 1;

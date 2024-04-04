@@ -1,5 +1,5 @@
 @media (max-width: 600px) {
-  .column.right.side  {
+  .column-side {
     display: none;
   }
 

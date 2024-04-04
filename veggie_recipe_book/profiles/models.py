@@ -17,10 +17,8 @@ class Profile(models.Model):
     MIN_LAST_NAME_LENGTH = 1
 
     username = models.CharField(max_length=MAX_USERNAME_LENGTH,
-                                unique=True,
                                 blank=False,
                                 null=False,
-                                help_text="Your Username",
                                 validators=[MinLengthValidator(MIN_USERNAME_LENGTH,
                                                                message=f'Username cannot be fewer '
                                                                        f'than {MIN_USERNAME_LENGTH} letters long'),
@@ -50,7 +48,6 @@ class Profile(models.Model):
                                     null=True,
                                     validators=[validate_image_size,
                                                 ],
-                                    help_text="Upload a picture",
                                     )
     email = models.EmailField(null=False,
                               blank=False,
@@ -59,3 +56,4 @@ class Profile(models.Model):
                                 primary_key=True,
                                 on_delete=models.CASCADE,
                                 )
+

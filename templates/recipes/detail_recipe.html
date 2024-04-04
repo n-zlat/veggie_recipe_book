@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    
+  <div class="detail-recipe">
+  
+  <h2>{{ recipe.title|lower|capfirst }}</h2>
+  
+   <img class="profile-picture" height="250px" 
+        src="{% if recipe.picture %}{{ recipe.picture.url }}{% endif %}" alt="picture of {{ recipe.title }}" />
+  
+  <h3>Ingredients</h3>
+
+  <ul>
+    {% include 'partials/ingredient_list.html' %}
+  </ul>
+  
+  <h3>Instructions</h3>
+  <p>{{ recipe.description }}</p>
+  
+  <p>Recipe Type: 
+      <a href="#">{{ recipe.get_recipe_type_display }}</a>
+  </p>
+  <p>Servings: {{ recipe.servings }}</p>
+  <p>Created by: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a> 
+  
+  {% if user.is_authenticated and user == recipe.author %}
+    <a href="{% url 'edit_recipe' pk=recipe.pk %}">Edit Recipe</a>
+    <a href="{% url 'delete_recipe' pk=recipe.pk %}">Delete Recipe</a>
+  {% endif %}
+    
+  </div>  
+{% endblock %}
