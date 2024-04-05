@@ -30,6 +30,14 @@
                 <p>Email: {{ profile.email }}</p>
         {% endif %}
    {% endif %}
+   
+       {% if user.pk == profile.pk %}
+       <div class="add-recipe-button">
+        <a 
+                href="{% url 'add_recipe' %}"><button>Add Recipe</button>
+        </a>
+       </div>
+   {% endif %}
     
     <h3>Added Recipes:</h3>
        {% if no_recipes %}
@@ -43,14 +51,6 @@
             {% endfor %}
         </ul>
         {% endif %}
-   
-    {% if user.pk == profile.pk %}
-       <div class="add-recipe-button">
-        <a 
-                href="{% url 'add_recipe' %}"><button>Add Recipe</button>
-        </a>
-       </div>
-   {% endif %}
    
    </div>
 {% endblock %}

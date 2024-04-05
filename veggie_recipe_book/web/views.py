@@ -1,4 +1,4 @@
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.db.models import Q
 from django.views.generic import ListView
 from veggie_recipe_book.recipes.models import Recipe
@@ -25,9 +25,17 @@ class HomeView(ListView):
 
         context['form'] = RecipeSearchForm(self.request.GET)
 
+        #TODO: paginator common logic
         paginator = Paginator(context['recipes'], self.paginate_by)
         page_number = self.request.GET.get('page')
-        page_obj = paginator.get_page(page_number)
+
+        try:
+            page_obj = paginator.page(page_number)
+        except PageNotAnInteger:
+            page_obj = paginator.page(1)
+        except EmptyPage:
+            page_obj = paginator.page(paginator.num_pages)
+
         context['page_obj'] = page_obj
 
         return context

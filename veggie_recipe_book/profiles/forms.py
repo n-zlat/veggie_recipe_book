@@ -11,7 +11,7 @@ UserModel = get_user_model()
 class CustomUserCreationForm(UserCreationForm):
     class Meta:
         model = UserModel
-        fields = ['username', 'password1', 'password2']
+        fields = ['email', 'username', 'password1', 'password2']
 
     def save(self, commit=True):
         user = super().save(commit=False)

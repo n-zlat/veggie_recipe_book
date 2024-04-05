@@ -1,0 +1,15 @@
+
+{% for recipe in recipes %}
+        
+        <div class="recipe-card">
+            <h3>{{ recipe.title|lower|capfirst }}</h3>
+            <img height="250px" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}">
+            <p>Type: <a href="#">{{ recipe.get_recipe_type_display }}</a></p>
+            <p>By: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a> on {{ recipe.created_at|date }}</p>
+            
+            <a href="{% url 'details_recipe' pk=recipe.pk %}">More</a>
+        </div>
+
+{% empty %}
+    <p>No recipes found for {{ recipe_type_display }}.</p>
+{% endfor %}

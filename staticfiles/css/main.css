@@ -16,6 +16,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  overflow: hidden;
 }
 
 .header p {
@@ -31,6 +32,52 @@ body {
   text-decoration: none;
   color: antiquewhite;
   margin-left: 10px;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: peachpuff;
+  padding: 5px 7px;
+  background-color: cornflowerblue;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: peachpuff;
+  border-radius: 0.1em;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: palevioletred;
+  min-width: 160px;
+  border-radius: 0.1em;
+
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
 }
 
 .row {
@@ -51,6 +98,8 @@ body {
   flex: 4;
   background-color: mistyrose;
   color: black;
+  padding-left: 5px;
+  margin-left: 10px;
 }
 
 .footer {

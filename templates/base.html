@@ -3,71 +3,85 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href={% static 'css/styles.css' %} />
+<link rel="stylesheet" href="{% static 'css/styles.css' %}" />
+<script src="https://kit.fontawesome.com/7f493d521e.js" crossorigin="anonymous"></script>
 <title>Veggie Recipes</title>
-    
 </head>
 
 <body>
-
 <div class="header">
     <p>Delicious recipes for picky eaters</p>
    {% if user.is_authenticated %}
         <nav class="in-row">
             <a href="{% url 'home' %}">Home</a>
-            <a href="#">Categories</a>
-            <a href="{% url 'details_profile' pk=user.pk %}">My Account</a>
             <a href="#">Favourites</a>
+
+            <div class="dropdown">
+                <div class="dropbtn-content"><a href="#">Categories</a></div>
+                <div class="dropdown-content">
+                    <a href="{% url 'baked_goods' %}">Baked Goods</a>
+                    <a href="{% url 'desserts' %}">Desserts</a>
+                    <a href="{% url 'sides' %}">Sides</a>
+                    <a href="{% url 'mains' %}">Mains</a>
+                    <a href="{% url 'drinks' %}">Drinks</a>
+                </div>
+            </div>
+            
+            <a href="{% url 'details_profile' pk=user.pk %}">My Account</a>
+            
             <a href="{% url 'sign_out' %}">Log out</a>
         </nav>
     {% else %}
         <nav class="in-row">
             <a href="{% url 'home' %}">Home</a>
+            <div class="dropdown">
+                <div class="dropbtn-content"><a href="#">Categories</a></div>
+                <div class="dropdown-content">
+                    <a href="#">Baked Goods</a>
+                    <a href="#">Desserts</a>
+                    <a href="#">Sides</a>
+                    <a href="#">Mains</a>
+                    <a href="#">Drinks</a>
+                </div>
+            </div>
             <a href="{% url 'sign_in' %}">Log in</a>
             <a href="{% url 'sign_up' %}">Register</a>
         </nav>
-    {% endif %}    
-    
-    
+    {% endif %}
 </div>
 
-
 <div class="row">
-  <div class="column middle" >
-      {% block content %} 
-          
-      {% endblock %} 
+  <div class="column middle">
+      {% block content %}
+      {% endblock %}
   </div>
-
-  <div class="column-side" ><img height="auto" src="{% static 'images/sidebar_img.jpg' %}" alt="sidebar image"></div>
+  <div class="column-side">
+      <img height="auto" src="{% static 'images/sidebar_img.jpg' %}" alt="sidebar image">
+  </div>
 </div>
 
 <div class="footer">
-
-        <div class="footer-column">
-            <h3>Useful Links</h3>
-            <a href="#">FAQs</a> <br>
-            <a href="#">Unit Conversions Cheatsheet</a> <br>
-            <a href="#">Ingredient Substitutes</a> <br>
-        </div>
-    
-        <div class="footer-column">
-            <h3>Quick Links</h3>
-            <a href="#">Baked Goods</a> <br>
-            <a href="#">Desserts</a> <br>
-            <a href="#">Sides</a> <br>
-            <a href="#">Mains</a> <br>
-            <a href="#">Drinks</a>
-        </div>
-    
-        <div class="footer-column">
-            <h3>Socials</h3>
-            <a href="#">Instagram</a> <br>
-            <a href="#">Twitter</a> <br>
-        </div>
+    <div class="footer-column">
+        <h3>Useful Links</h3>
+        <a href="#">FAQs</a><br>
+        <a href="#">Unit Conversions Cheatsheet</a><br>
+        <a href="#">Ingredient Substitutes</a><br>
+    </div>
+    <div class="footer-column">
+        <h3>Quick Links</h3>
+        <a href="{% url 'baked_goods' %}">Baked Goods</a><br>
+        <a href="{% url 'desserts' %}">Desserts</a><br>
+        <a href="{% url 'sides' %}">Sides</a><br>
+        <a href="{% url 'mains' %}">Mains</a><br>
+        <a href="{% url 'drinks' %}">Drinks</a>
+    </div>
+    <div class="footer-column">
+        <h3>Socials</h3>
+        <a href="#">Instagram</a><br>
+        <a href="#">Twitter</a><br>
+    </div>
 </div>
 
 </body>

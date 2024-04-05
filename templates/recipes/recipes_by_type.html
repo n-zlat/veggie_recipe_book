@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2> {{ recipe_type_display }}: </h2>
+    
+    {% include 'partials/recipes_type_of_food_page.html' %}
+
+{% endblock %}

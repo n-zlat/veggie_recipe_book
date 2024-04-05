@@ -9,6 +9,7 @@ urlpatterns = [
     path("", include('veggie_recipe_book.web.urls')),
     path("profile/", include('veggie_recipe_book.profiles.urls')),
     path("recipe/", include('veggie_recipe_book.recipes.urls')),
+    path("social/", include('veggie_recipe_book.social.urls'))
 
 ]
 
