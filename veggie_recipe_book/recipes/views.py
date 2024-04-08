@@ -26,7 +26,6 @@ class EditRecipeView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Recipe
     form_class = RecipeForm
     template_name = 'recipes/edit_recipe.html'
-    # success_url = reverse_lazy('details_recipe')
 
     def get_success_url(self):
         return reverse('details_recipe', kwargs={'pk': self.object.pk})
@@ -60,6 +59,7 @@ class DetailRecipeView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         recipe = self.get_object()
+        recipe_type = recipe.recipe_type
 
         comments = Comment.objects.filter(recipe=recipe)
         context['comments'] = comments
@@ -70,19 +70,22 @@ class DetailRecipeView(DetailView):
                        .count())
         context['total_likes'] = total_likes
 
+        context['recipe_type'] = recipe_type
+
         return context
 
 
-class RecipesByTypeView(ListView):
+class TypeOfRecipeView(ListView):
     template_name = 'recipes/recipes_by_type.html'
     context_object_name = 'recipes'
     paginate_by = 12
 
     def get_queryset(self):
         recipe_type = self.kwargs.get('recipe_type')
-        return (Recipe.objects
+        return ((Recipe.objects
                 .filter(recipe_type=recipe_type)
                 .filter(is_private=False))
+                .order_by('-created_at'))
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -91,17 +94,4 @@ class RecipesByTypeView(ListView):
         recipe_type_display = dict(Recipe.RecipeType.choices)[recipe_type]
         context['recipe_type_display'] = recipe_type_display
 
-        #TODO: paginator common logic
-        paginator = Paginator(context['recipes'], self.paginate_by)
-        page = self.request.GET.get('page')
-
-        try:
-            recipes = paginator.page(page)
-        except PageNotAnInteger:
-            recipes = paginator.page(1)
-        except EmptyPage:
-            recipes = paginator.page(paginator.num_pages)
-        context['recipes'] = recipes
-
         return context
-

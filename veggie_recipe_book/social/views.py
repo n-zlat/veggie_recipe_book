@@ -43,3 +43,5 @@ def unlike_recipe(request, recipe_id):
     like = Like.objects.filter(user=request.user, recipe=recipe)
     like.delete()
     return HttpResponseRedirect(reverse('details_recipe', args=[recipe_id]))
+
+

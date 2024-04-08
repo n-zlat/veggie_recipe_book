@@ -4,7 +4,7 @@
         <div class="recipe-card">
             <h3>{{ recipe.title|lower|capfirst }}</h3>
             <img height="250px" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}">
-            <p>Type: <a href="#">{{ recipe.get_recipe_type_display }}</a></p>
+            <p>Type: <a href="{% url 'recipes_by_type' recipe_type=recipe.recipe_type %}">{{ recipe.get_recipe_type_display }}</a>
             <p>By: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a> on {{ recipe.created_at|date }}</p>
             
             <a href="{% url 'details_recipe' pk=recipe.pk %}">More</a>

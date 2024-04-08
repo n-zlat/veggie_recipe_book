@@ -2,44 +2,28 @@
 {% load static %}
 
 {% block content %}
-    
-<div class="search-form">
-    <form action="{% url 'home' %}" method="get">
-        {{ form.as_p }}
-        <button type="submit">Search</button>
-    </form>
-</div>    
-    
-<div class="recipes-all-public">
-    
-    {% for recipe in recipes %}
+ 
+    <div class="search-form">
+        <form action="{% url 'home' %}" method="get">
+            {{ form.as_p }}
+            <label><input type="checkbox" name="veggie_recipes" 
+                          {% if request.GET.veggie_recipes %}checked{% endif %}> Veggie Recipes</label>
+            <label><input type="checkbox" name="other_users" 
+                          {% if request.GET.other_users %}checked{% endif %}> Community Recipes</label>
+            <button type="submit">Search</button>
+        </form>
+    </div>
         
-        <div class="recipe-card">
-            <h3>{{ recipe.title|lower|capfirst }}</h3>
-            <img height="250px" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}">
-            <p>Type: <a href="#">{{ recipe.get_recipe_type_display }}</a></p>
-            <p>By: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a> on {{ recipe.created_at|date }}</p>
+    <div class="recipes-all-public">
+        
+        {% for recipe in recipes %}
             
-            <a href="{% url 'details_recipe' pk=recipe.pk %}">More</a>
-        </div>
-    {% endfor %}
+            {% include 'partials/recipe_card.html' %}
 
-</div>
+        {% endfor %}
     
-    <div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
+    </div>
+    
+    {% include 'partials/page_nav.html' %}
     
 {% endblock %}

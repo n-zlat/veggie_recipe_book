@@ -1,12 +1,13 @@
 from django.contrib.auth import login, get_user_model, logout
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView
-from django.shortcuts import redirect, get_object_or_404
+from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, DetailView, UpdateView, DeleteView
 from veggie_recipe_book.profiles.forms import CustomUserCreationForm, ProfilePictureForm
 from veggie_recipe_book.profiles.models import Profile
-
+from veggie_recipe_book.recipes.models import Like, Recipe
 
 UserModel = get_user_model()
 
@@ -91,5 +92,12 @@ class ProfileUpdateView(LoginRequiredMixin, UpdateView):
 class DeleteProfileView(DeleteView):
     queryset = Profile.objects.all()
     template_name = "profiles/delete_profile.html"
-    #TODO: fix the signout
     success_url = reverse_lazy("home")
+
+
+@login_required
+def favourite_recipes(request):
+    user = request.user
+    liked_recipe_ids = Like.objects.filter(user=user).values_list('recipe_id', flat=True)
+    favourites = Recipe.objects.filter(pk__in=liked_recipe_ids)
+    return render(request, 'profiles/favourite_recipes.html', {'favourites': favourites})

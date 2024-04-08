@@ -4,7 +4,9 @@ from veggie_recipe_book.profiles.views import (
     SignUpUserView,
     DetailsProfileView,
     ProfileUpdateView,
-    DeleteProfileView, signout_user,
+    DeleteProfileView,
+    signout_user,
+    favourite_recipes,
 )
 
 urlpatterns = [
@@ -14,4 +16,5 @@ urlpatterns = [
     path('details/<int:pk>/', DetailsProfileView.as_view(), name='details_profile'),
     path('update/<int:pk>/', ProfileUpdateView.as_view(), name='edit_profile'),
     path('delete/<int:pk>/', DeleteProfileView.as_view(), name='delete_profile'),
+    path('favourites/', favourite_recipes, name='favourite_recipes')
 ]

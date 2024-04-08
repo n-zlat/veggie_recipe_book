@@ -7,22 +7,22 @@
     
   <div class="detail-recipe">
   
-  <h2>{{ recipe.title|lower|capfirst }}</h2> 
-  
+  <h2>{{ recipe.title|lower|capfirst }}</h2>
+
   <div class="likes">
      {% if user.is_authenticated %}
         {% if has_liked %}
-            <a href="{% url 'recipe_unlike' recipe_id=recipe.id %}" 
+            <a href="{% url 'recipe_unlike' recipe_id=recipe.id %}"
                class="like-btn liked"><i class="fas fa-heart"></i></a> {{ total_likes }}
         {% else %}
-            <a href="{% url 'recipe_like' recipe_id=recipe.id %}" 
+            <a href="{% url 'recipe_like' recipe_id=recipe.id %}"
                class="like-btn"><i class="far fa-heart"></i></a> {{ total_likes }}
         {% endif %}
      {% endif %}
-     
+
   </div>
   </div>
-  
+
   <div class="edit-delete-recipe-buttons">
   {% if user.is_authenticated and user == recipe.author %}
       <a href="{% url 'edit_recipe' pk=recipe.id %}">Edit Recipe</a>
@@ -43,26 +43,27 @@
   <p>{{ recipe.description }}</p>
   
   <p>Recipe Type: 
-      <a href="#">{{ recipe.get_recipe_type_display }}</a>
+      <a href="{% url 'recipes_by_type' recipe_type %}">{{ recipe.get_recipe_type_display }}</a>
   </p>
+
   <p>Servings: {{ recipe.servings }}</p>
   <p>Created by: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a>
-  
-  
+
+
  <div class="add-comment">
  <form method="post" action="{% url 'add_comment' recipe.pk %}">
         {{ comment_form.as_p }}
         <button type="submit">Submit Comment</button>
-     
+
         {% csrf_token %}
 
  </form>
  </div>
-  
+
  <div class="comments">
- 
+
     <h3>Comments</h3>
-    
+
      {% if comments %}
       <ul>
         {% for comment in comments %}
@@ -73,7 +74,7 @@
     {% else %}
       <p>No comments yet.</p>
     {% endif %}
-     
+
  </div>
     
   </div>  

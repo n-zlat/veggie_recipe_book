@@ -57,3 +57,7 @@ class Profile(models.Model):
                                 on_delete=models.CASCADE,
                                 )
 
+    def delete(self, *args, **kwargs):
+        self.user.delete()
+        super().delete(*args, **kwargs)
+
