@@ -2,16 +2,18 @@
 {% load static %}
 
 {% block content %}
-    <h2>Your Liked Recipes</h2>
+<h2>Your Liked Recipes</h2>
+
+<div class="recipes-container">
+    
     {% if favourites %}
-        <ul>
-            {% for recipe in favourites %}
-                
+        {% for recipe in favourites %}
                 {% include 'partials/recipe_card.html' %}
-                
-            {% endfor %}
-        </ul>
+        {% endfor %}
     {% else %}
         <p>You haven't liked any recipes yet</p>
     {% endif %}
+
+</div>
 {% endblock %}
+

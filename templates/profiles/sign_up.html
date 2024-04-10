@@ -2,16 +2,42 @@
 {% load static %}
 
 {% block content %}
+    
   <div class="sign-up-form">
   <h2>Sign Up</h2>
   <form action="{% url 'sign_up' %}" method="post">
-    {{ form.as_p }}
+
+    <div class="additional-info">
+      Username: {{ form.username }}
+      <div class="additional-info-tooltip">
+        <p>Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only</p>
+      </div>
+    </div>
+
+    <div class="additional-info">
+      Password: {{ form.password1 }}
+      <div class="additional-info-tooltip">
+        <p>Your password can’t be too similar to your other personal information.</p>
+        <p>Your password must contain at least 8 characters.</p>
+        <p>Your password can’t be a commonly used password.</p>
+        <p>Your password can’t be entirely numeric.</p>
+      </div>
+    </div>
+
+    <div class="additional-info">
+      Confirm Password: {{ form.password2 }}
+      <div class="additional-info-tooltip">
+        <p>Enter the same password as before, for verification.</p>
+      </div>
+    </div>
+
     <button type="submit">Sign Up</button>
     {% csrf_token %}
   </form>
-  </div>
-    
-  <div class="sign-in-option"> 
+</div>
+
+
+  <div class="sign-in-option">
       <p>If you already have an account, please sign in here: <a href="{% url 'sign_in' %}">Log in</a></p>
   </div>
 {% endblock %}

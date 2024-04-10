@@ -1,8 +1,9 @@
-
+<div class="recipes-container">
 {% for recipe in recipes %}
+    
         
         <div class="recipe-card">
-            <h3>{{ recipe.title|lower|capfirst }}</h3>
+            <h3><a href="{% url 'details_recipe' pk=recipe.pk %}">{{ recipe.title|lower|capfirst }}</a></h3>
             <img height="250px" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}">
             <p>Type: <a href="{% url 'recipes_by_type' recipe_type=recipe.recipe_type %}">{{ recipe.get_recipe_type_display }}</a>
             <p>By: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a> on {{ recipe.created_at|date }}</p>
@@ -13,3 +14,5 @@
 {% empty %}
     <p>No recipes found for {{ recipe_type_display }}.</p>
 {% endfor %}
+
+</div>

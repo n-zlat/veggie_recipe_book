@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'veggie_recipe_book.recipes',
     'veggie_recipe_book.profiles',
     'veggie_recipe_book.social',
+    'veggie_recipe_book.unit_converter',
 
 ]
 

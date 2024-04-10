@@ -14,16 +14,12 @@
         </form>
     </div>
         
-    <div class="recipes-all-public">
-        
-        {% for recipe in recipes %}
-            
-            {% include 'partials/recipe_card.html' %}
-
-        {% endfor %}
-    
+    <div class="recipes-container">
+    {% for recipe in recipes %}
+        {% include 'partials/recipe_card.html' %}
+    {% endfor %}
     </div>
-    
+
     {% include 'partials/page_nav.html' %}
     
 {% endblock %}

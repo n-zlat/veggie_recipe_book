@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    
+<div class="converter">
+    <h1>Measurement Unit Converter</h1>
+
+    <form method="post">
+        {{ form.as_p }}
+        
+        <button type="submit">Convert</button>
+
+        {% csrf_token %}
+
+    </form>
+    
+    {% if conversion_result %}
+        <div class="conversion-result">
+            <p>{{ form.amount.value }} {{ form.from_unit.value }}(s) is equal to {{ conversion_result|floatformat:'-2' }} {{ form.to_unit.value }}(s)</p>
+        </div>
+    {% endif %}
+    
+    {% if error_message %}
+        <div class="error-message">
+            <p>{{ error_message }}</p>
+        </div>
+    {% endif %}
+
+</div>
+{% endblock %}

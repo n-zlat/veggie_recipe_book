@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 
-
 {% block content %}
    <div class="profile-details">
 
@@ -12,7 +11,6 @@
             <a href="{% url 'delete_profile' pk=user.pk %}" class="delete-button">Delete</a>
        </div>
    {% endif %}
-   
    
     <img class="profile-picture" height="150px" src="{% if profile.profile_pic %}{{ profile.profile_pic.url }}
     {% else %}{% static 'images/anon_user_profile_pic.jpg' %}{% endif %}" alt="profile picture" >
@@ -43,13 +41,15 @@
        {% if no_recipes %}
         <p>No recipes to show</p>
         {% else %}
-        <ul>
-            {% for recipe in recipes %}
-                <li>
-                    <a href="{% url 'details_recipe' pk=recipe.pk %}">{{ recipe.title|lower|capfirst }}</a>
-                </li>
-            {% endfor %}
-        </ul>
+        <div class="recipe-list"> <!-- Added a container div for the recipe list -->
+            <ul>
+                {% for recipe in recipes %}
+                    <li>
+                        <a href="{% url 'details_recipe' pk=recipe.pk %}">{{ recipe.title|lower|capfirst }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
         {% endif %}
    
    </div>

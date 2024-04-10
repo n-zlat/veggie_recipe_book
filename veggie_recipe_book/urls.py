@@ -6,10 +6,11 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path("", include('veggie_recipe_book.web.urls')),
-    path("profile/", include('veggie_recipe_book.profiles.urls')),
-    path("recipe/", include('veggie_recipe_book.recipes.urls')),
-    path("social/", include('veggie_recipe_book.social.urls'))
+    path('', include('veggie_recipe_book.web.urls')),
+    path('profile/', include('veggie_recipe_book.profiles.urls')),
+    path('recipe/', include('veggie_recipe_book.recipes.urls')),
+    path('social/', include('veggie_recipe_book.social.urls')),
+    path('converter/', include('veggie_recipe_book.unit_converter.urls')),
 
 ]
 

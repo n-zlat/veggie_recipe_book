@@ -60,8 +60,6 @@ class Recipe(models.Model):
                                      blank=False,
                                      null=False,
                                      )
-    # likes = models.IntegerField(default=0,
-    #                             )
     created_at = models.DateTimeField(auto_now_add=True,
                                       )
     edited_at = models.DateTimeField(auto_now=True,

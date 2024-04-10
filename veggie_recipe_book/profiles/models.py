@@ -3,6 +3,7 @@ from django.core.validators import MinLengthValidator
 from django.db import models
 
 from veggie_recipe_book.profiles.validators import UsernameValidator
+from veggie_recipe_book.recipes.models import Recipe
 from veggie_recipe_book.recipes.validators import validate_image_size
 
 UserModel = get_user_model()

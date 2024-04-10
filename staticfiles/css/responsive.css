@@ -11,4 +11,11 @@
     flex-direction: column;
   }
 
+  .login-form form,
+  .sign-up-form form,
+  .sign-out-form form,
+  .edit-form form,
+  .delete-profile-form form {
+    width: 90%;
+  }
 }
