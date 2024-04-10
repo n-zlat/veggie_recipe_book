@@ -1,10 +1,13 @@
+{% load static %}
+
+
 <div class="recipes-container">
 {% for recipe in recipes %}
     
         
         <div class="recipe-card">
             <h3><a href="{% url 'details_recipe' pk=recipe.pk %}">{{ recipe.title|lower|capfirst }}</a></h3>
-            <img height="250px" src="{{ recipe.picture.url }}" alt="{{ recipe.title }}">
+            <img class="profile-picture" height="250px" src="{% if recipe.picture %}{{ recipe.picture.url }}{% else %}{% static 'images/no_image_avb.png' %}{% endif %}" alt="picture of {{ recipe.title }}" />
             <p>Type: <a href="{% url 'recipes_by_type' recipe_type=recipe.recipe_type %}">{{ recipe.get_recipe_type_display }}</a>
             <p>By: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a> on {{ recipe.created_at|date }}</p>
             

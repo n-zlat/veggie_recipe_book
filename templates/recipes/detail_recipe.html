@@ -14,8 +14,9 @@
             {% else %}
                 <a href="{% url 'recipe_like' recipe_id=recipe.id %}" class="like-btn"><i class="far fa-heart"></i></a>
             {% endif %}
+             <span>{{ total_likes }}</span>
          {% endif %}
-         <span>{{ total_likes }}</span>
+         
       </div>
     </h2>
 
@@ -26,9 +27,9 @@
       {% endif %}
     </div>
   
-    <img class="profile-picture" height="250px" src="{% if recipe.picture %}{{ recipe.picture.url }}{% endif %}" alt="picture of {{ recipe.title }}" />
+    <img class="profile-picture" height="250px" src="{% if recipe.picture %}{{ recipe.picture.url }}{% else %}{% static 'images/no_image_avb.png' %}{% endif %}" alt="picture of {{ recipe.title }}" />
     
-      <div class="info">
+    <div class="info">
       <p>Recipe Type: <a href="{% url 'recipes_by_type' recipe_type %}">{{ recipe.get_recipe_type_display }}</a></p>
       <p>Servings: {{ recipe.servings }}</p>
       <p>Created by: <a href="{% url 'details_profile' pk=recipe.author.pk %}">{{ recipe.author.username }}</a></p>
@@ -51,34 +52,35 @@
       </div>
     </div>
   
+    {% if user.is_authenticated %}
+
     <div class="add-comment">
       <form method="post" action="{% url 'add_comment' recipe.pk %}">
+        {{ comment_form.as_p }}
+        <button class="comment-btn" type="submit">Submit Comment</button>
         {% csrf_token %}
-        {{ comment_form.non_field_errors }}
-        <input type="hidden" name="recipe" value="{{ recipe.pk }}">
-        <textarea name="comment" rows="4" placeholder="Write your comment here..." required></textarea>
-        <button type="submit">Comment</button>
       </form>
-    </div>
-
-    <div class="comments">
-      <h3>Comments</h3>
-      {% if comments %}
-        <ul>
+     </div>
+   {% endif %}
+  
+      <div class="comments">
+       <h3>Comments</h3>
+       {% if comments %}
+         <ul>
           {% for comment in comments %}
             <li>
               <blockquote>
                 <p>{{ comment.content }}</p>
                 <footer>- <a href="{% url 'details_profile' pk=comment.user.pk %}">{{ comment.user.username }}</a></footer>
               </blockquote>
-            </li>
-          {% endfor %}
-        </ul>
-      {% else %}
-        <p>No comments yet.</p>
-      {% endif %}
-    </div>
+                </li>
+              {% endfor %}
+              </ul>
+       {% else %}
+             <p>No comments yet.</p>
+       {% endif %}
+      </div>
+  
   </div>
 </div>
 {% endblock %}
-

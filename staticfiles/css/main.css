@@ -251,7 +251,7 @@ body {
   margin-top: 0;
 }
 
-.add-comment form textarea {
+.add-comment {
   width: 100%;
   height: 100px;
   margin-top: 10px;
@@ -276,9 +276,21 @@ body {
   text-decoration: underline;
 }
 
+.add-comment,
 .comments {
-  margin-top: 20px;
+  display: block;
+  margin-top: 90px; /* Add margin to create space between add comment form and comments */
 }
+
+.add-comment,
+.comments {
+  width: 100%;
+}
+
+.add-comment {
+  margin: 20px;
+}
+
 
 .comments h3 {
   margin-bottom: 10px;
@@ -287,21 +299,26 @@ body {
 .comments ul {
   padding: 0;
   list-style: none;
+  margin: 10px;
 }
 
 .comments ul li {
-  margin-bottom: 20px;
+  margin: 20px;
+}
+
+.comment-btn {
+  margin: 5px;
 }
 
 .comments ul li blockquote {
   background-color: peachpuff;
   border-left: 10px solid cornflowerblue;
-  margin: 0;
+  margin: 20px 0; /* Add margin to separate comments */
   padding: 10px 20px;
 }
 
 .comments ul li blockquote p {
-  margin: 0;
+  margin: 5px;
 }
 
 /* Profile details page */
@@ -313,8 +330,8 @@ body {
 }
 
 .profile-picture {
-  width: 150px;
-  height: 150px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   margin-bottom: 20px;
 }
